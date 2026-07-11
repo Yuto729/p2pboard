@@ -23,7 +23,7 @@ func TestMutualDiscovery(t *testing.T) {
 			ListenPort:       listen,
 			Port:             port,
 			AnnounceInterval: 200 * time.Millisecond,
-			Logf:             t.Logf,
+			Logf:             func(string, ...any) {},
 		})
 		if err != nil {
 			t.Fatalf("New(%s): %v", name, err)

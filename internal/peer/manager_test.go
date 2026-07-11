@@ -17,7 +17,7 @@ func newTestManager(t *testing.T, peerID, name string) *Manager {
 		PeerID:     peerID,
 		Name:       name,
 		ListenPort: 0,
-		Logf:       t.Logf,
+		Logf:       func(string, ...any) {},
 	})
 	if err != nil {
 		t.Fatalf("NewManager(%s): %v", name, err)

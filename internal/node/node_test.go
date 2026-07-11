@@ -9,11 +9,13 @@ import (
 // startNode は同一テスト用 discovery ポートで 1 ノードを起動する。
 func startNode(t *testing.T, ctx context.Context, room, name string, discPort int) *Node {
 	t.Helper()
+	// t.Logf はテスト完了後に呼ぶと panic するため、バックグラウンド goroutine が
+	// シャットダウン中に出すログでは使わない。ここでは破棄ロガーを渡す。
 	n, err := New(Config{
 		RoomName:      room,
 		Name:          name,
 		DiscoveryPort: discPort,
-		Logf:          t.Logf,
+		Logf:          func(string, ...any) {},
 	})
 	if err != nil {
 		t.Fatalf("New(%s): %v", name, err)
