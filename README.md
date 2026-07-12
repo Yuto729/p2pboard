@@ -1,5 +1,7 @@
 # P2PBoard
 
+日本語 | [English](README.en.md)
+
 同一 LAN / Docker ネットワーク上で動作する、中央サーバ不要の P2P ホワイトボード / チャット CLI。
 同じ room に参加した peer を UDP multicast で自動発見し、TCP の張りっぱなし接続で投稿を配送する。
 人間はターミナルから、AI エージェントや bot は JSONL 入出力を通じて、同じ room に参加できる。
