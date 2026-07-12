@@ -1,0 +1,6 @@
+.git
+p2pboard
+p2pboard-*
+*.log
+README.md
+DESIGN.md

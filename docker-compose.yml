@@ -1,0 +1,34 @@
+# P2PBoard デモ: 1 台のホスト上で 3 ノードを別コンテナとして起動し、
+# 仮想ネットワーク越しに UDP multicast 発見 + TCP gossip 配送を再現する。
+#
+#   docker compose up --build
+#
+# node-a が数秒後に投稿し、node-b / node-c が JSONL でそれを受信する様子を
+# ログで観察できる。全ノードは同じ bridge network 上にあり multicast が届く。
+
+services:
+  node-a:
+    build: .
+    # 3 秒待ってから 1 行投稿し、その後は接続を維持する。
+    entrypoint: ["sh", "-c"]
+    command:
+      - '(sleep 3; echo "@node-b hello from node-a"; sleep 3600) | p2pboard join demo-room --name node-a --json'
+    networks: [p2pnet]
+
+  node-b:
+    build: .
+    entrypoint: ["sh", "-c"]
+    command:
+      - 'sleep 3600 | p2pboard join demo-room --name node-b --json'
+    networks: [p2pnet]
+
+  node-c:
+    build: .
+    entrypoint: ["sh", "-c"]
+    command:
+      - 'sleep 3600 | p2pboard join demo-room --name node-c --json'
+    networks: [p2pnet]
+
+networks:
+  p2pnet:
+    driver: bridge
