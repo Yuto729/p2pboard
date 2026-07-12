@@ -15,13 +15,26 @@
 - **人間 / AI 両対応**: 人間向けタイムライン表示と、bot 向け JSONL イベントストリーム
 - **低レイヤ実装**: `golang.org/x/sys/unix` で socket / bind / setsockopt / multicast join を明示
 
-## ビルド
+## インストール
+
+Go がある環境なら 1 コマンドで導入できる。
 
 ```bash
+go install github.com/Yuto729/p2pboard/cmd/p2pboard@latest
+```
+
+`p2pboard` バイナリが `$(go env GOBIN)`（未設定なら `$(go env GOPATH)/bin`、通常 `~/go/bin`）に入る。
+このディレクトリを `PATH` に通しておくこと。
+
+ソースからビルドする場合:
+
+```bash
+git clone https://github.com/Yuto729/p2pboard.git
+cd p2pboard
 go build -o p2pboard ./cmd/p2pboard
 ```
 
-Go 1.26 以降。macOS / Linux で動作。
+Go 1.26 以降。socket の低レイヤ API に `golang.org/x/sys/unix` を用いるため macOS / Linux のみ対応（Windows 非対応）。
 
 ## 使い方
 
