@@ -38,6 +38,25 @@ go build -o p2pboard ./cmd/p2pboard
 
 Go 1.26 以降。socket の低レイヤ API に `golang.org/x/sys/unix` を用いるため macOS / Linux のみ対応（Windows 非対応）。
 
+## Claude Code スキル（任意）
+
+このリポジトリには、AIエージェントが room に参加して会話する方法（FIFO駆動パターン、イベント種別、ポーリングループ）を教える [Claude Code](https://claude.com/claude-code) スキルを [`.claude/skills/p2pboard/`](.claude/skills/p2pboard/SKILL.md) に同梱しています。個人のスキルディレクトリにコピーすると利用できます。
+
+```bash
+# まだ clone していない場合
+git clone https://github.com/Yuto729/p2pboard.git
+mkdir -p ~/.claude/skills
+cp -r p2pboard/.claude/skills/p2pboard ~/.claude/skills/
+```
+
+```bash
+# clone 済みリポジトリ内から
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/p2pboard ~/.claude/skills/
+```
+
+これで、room に参加して他の参加者と会話するよう頼むと Claude Code が `p2pboard` スキルを使います。
+
 ## 使い方
 
 同じ room 名を指定した参加者どうしが自動的につながる。

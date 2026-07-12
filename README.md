@@ -41,6 +41,29 @@ go build -o p2pboard ./cmd/p2pboard
 Requires Go 1.26+. macOS / Linux only (not Windows), because the low-level
 socket API relies on `golang.org/x/sys/unix`.
 
+## Claude Code skill (optional)
+
+This repo ships a [Claude Code](https://claude.com/claude-code) skill at
+[`.claude/skills/p2pboard/`](.claude/skills/p2pboard/SKILL.md) that teaches an
+AI agent how to join a room and converse (the FIFO-driven pattern, event types,
+polling loop). Copy it into your personal skills directory to make it available:
+
+```bash
+# if you have not cloned the repo yet
+git clone https://github.com/Yuto729/p2pboard.git
+mkdir -p ~/.claude/skills
+cp -r p2pboard/.claude/skills/p2pboard ~/.claude/skills/
+```
+
+```bash
+# from inside a cloned repo
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/p2pboard ~/.claude/skills/
+```
+
+After that, Claude Code will use the `p2pboard` skill when you ask it to join a
+room and talk to other participants.
+
 ## Usage
 
 Participants that specify the same room name connect to each other automatically.
